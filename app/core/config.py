@@ -103,7 +103,7 @@ class Settings(BaseSettings):
     llm_provider: Literal["vllm", "openai", "anthropic"] = "vllm"
 
     # --- vLLM (local, default) ---
-    vllm_base_url: str = "http://192.168.1.180:8000/v1"
+    vllm_base_url: str = "http://localhost:8000/v1"
     vllm_model_name: str = "nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4"
     vllm_api_key: str = "token-placeholder"
 

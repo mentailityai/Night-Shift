@@ -11,7 +11,7 @@ Night-Shift operates on a **dual-loop architecture**:
 
 ---
 
-<video src="NightShiftPromo.mp4" controls autoplay muted loop playsinline></video>
+<video src="https://github.com/MentailityAI/Night-Shift/raw/main/NightShiftPromo.mp4" controls autoplay muted loop playsinline></video>
 
 ---
 
@@ -139,7 +139,7 @@ Open `.env` and update the following at minimum:
 | Variable | What to set |
 |---|---|
 | `LLM_PROVIDER` | `vllm`, `openai`, or `anthropic` |
-| `VLLM_BASE_URL` | Your vLLM server URL (e.g., `http://192.168.1.180:8000/v1`) |
+| `VLLM_BASE_URL` | Your vLLM server URL (e.g., `http://localhost:8000/v1`) |
 | `OPENAI_API_KEY` | Your OpenAI key (if using OpenAI) |
 | `ANTHROPIC_API_KEY` | Your Anthropic key (if using Anthropic) |
 
@@ -172,7 +172,7 @@ All settings live in the `.env` file. Every parameter has a sensible default so 
 | Variable | Default | Description |
 |---|---|---|
 | `LLM_PROVIDER` | `vllm` | Active provider: `vllm`, `openai`, or `anthropic` |
-| `VLLM_BASE_URL` | `http://192.168.1.180:8000/v1` | vLLM OpenAI-compatible endpoint |
+| `VLLM_BASE_URL` | `http://localhost:8000/v1` | vLLM OpenAI-compatible endpoint |
 | `VLLM_MODEL_NAME` | `nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4` | Model served by vLLM |
 | `VLLM_API_KEY` | `token-placeholder` | vLLM API key (if authentication is enabled) |
 | `OPENAI_API_KEY` | — | OpenAI API key |
