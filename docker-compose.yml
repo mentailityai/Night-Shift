@@ -1,0 +1,60 @@
+# =============================================================================
+# Night-Shift Preference Optimizer — Docker Compose
+# =============================================================================
+# Spins up the required infrastructure services:
+#   1. PostgreSQL with the pgvector extension (for embeddings + relational data)
+#   2. Redis (as the Celery message broker and result backend)
+#
+# Usage:
+#   docker-compose up -d        — start services in background
+#   docker-compose down -v      — stop and remove volumes (clean slate)
+# =============================================================================
+
+services:
+  # ---------------------------------------------------------------------------
+  # PostgreSQL + pgvector
+  # ---------------------------------------------------------------------------
+  # Uses the official pgvector image which ships PostgreSQL 16 with the vector
+  # extension pre-installed.  The extension is activated automatically via the
+  # init script mounted below.
+  # ---------------------------------------------------------------------------
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: nightshift-postgres
+    restart: unless-stopped
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-nightshift}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-nightshift}
+      POSTGRES_DB: ${POSTGRES_DB:-nightshift}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # Auto-enable the pgvector extension on first startup
+      - ./scripts/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-nightshift}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ---------------------------------------------------------------------------
+  # Redis
+  # ---------------------------------------------------------------------------
+  # Lightweight in-memory store used as the Celery broker and optional result
+  # backend.  No persistence is configured — task results are ephemeral.
+  # ---------------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: nightshift-redis
+    restart: unless-stopped
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:

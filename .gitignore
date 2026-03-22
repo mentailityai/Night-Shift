@@ -1,0 +1,77 @@
+# =============================================================================
+# Night-Shift — Git Ignore
+# =============================================================================
+
+# ----- Internal Prompts / Specs -----
+Prompts/
+
+# ----- Environment & Secrets -----
+# The .env file contains API keys, passwords, and local IP addresses.
+# NEVER commit this. Use .env.example as the template.
+.env
+
+# ----- Python -----
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+dist/
+build/
+*.whl
+
+# ----- Virtual Environments -----
+venv/
+.venv/
+env/
+ENV/
+
+# ----- IDE / Editor -----
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ----- Testing -----
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# ----- Alembic -----
+# Migration versions ARE tracked (they're source code).
+# Only ignore auto-generated temp files.
+alembic/tmp/
+
+# ----- Fine-Tuning Exports -----
+# The exports/ directory contains generated JSONL training files.
+# These are large, machine-generated, and should not be in version control.
+exports/
+
+# ----- Celery -----
+celerybeat-schedule
+celerybeat.pid
+
+# ----- Embedding Model Cache -----
+# sentence-transformers downloads models to a local cache.
+# This can be several GB and should never be committed.
+.cache/
+models/
+
+# ----- Docker -----
+# Docker volumes and overrides
+docker-compose.override.yml
+
+# ----- Logs -----
+*.log
+logs/
+
+# ----- OS Files -----
+Desktop.ini
+ehthumbs.db
+
+# ----- Node / JS -----
+node_modules/
