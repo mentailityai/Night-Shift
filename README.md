@@ -7,6 +7,10 @@ Night-Shift operates on a **dual-loop architecture**:
 - **Fast Loop** — Extracted preferences are immediately available to any AI agent via an MCP server. No retraining required.
 - **Slow Loop** — Once enough high-quality training pairs accumulate, the system exports JSONL for permanent model fine-tuning.
 
+## Overview
+
+---
+
 <video src="NightShiftPromo.mp4" controls autoplay muted loop playsinline></video>
 
 ---
